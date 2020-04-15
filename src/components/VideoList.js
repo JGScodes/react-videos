@@ -7,13 +7,15 @@ import VideoItem from './VideoItem';
 //    return <div>{props.videos.length}</div>
 // };
 
-// This does the same as above but with destructuring of the videos prop off the reponse api object
-const VideoList = ({ videos }) => {
+// This does the same as above but with destructuring of the videos prop off the response api object.
+// props.onVideoSelect deconstructed here from App
+// deconstructing videos and onVideoSelect from the props object
+const VideoList = ({ videos, onVideoSelect }) => {
   const renderedList = videos.map((video) => {
-     return <VideoItem video={video}/>;
+     return <VideoItem onVideoSelect={onVideoSelect} video={video}/>;
   })
 
-  return <div>{renderedList}</div>
+  return <div className="ui relaxed divided list">{renderedList}</div>
 };
 
 export default VideoList;
