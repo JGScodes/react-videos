@@ -3,8 +3,9 @@ import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 import youtubeAxios from '../apis/youtube';
-const KEY = 'AIzaSyBIQt5GTFYoSZWJpXEDj8tVuRdITC1Fxa8';
 
+
+const KEY = 'AIzaSyBIQt5GTFYoSZWJpXEDj8tVuRdITC1Fxa8';
 
 class App extends React.Component {
 
