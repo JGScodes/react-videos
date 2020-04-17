@@ -9,7 +9,7 @@ import VideoItem from './VideoItem';
 
 // This does the same as above but with destructuring of the videos prop off the response api object.
 // props.onVideoSelect deconstructed here from App
-// deconstructing videos and onVideoSelect from the props object
+// deconstructing videos and onVideoSelect from the videos property
 const VideoList = ({ videos, onVideoSelect }) => {
   const renderedList = videos.map((video) => {
      return <VideoItem onVideoSelect={onVideoSelect} video={video}/>;

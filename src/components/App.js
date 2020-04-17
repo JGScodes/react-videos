@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
 import youtubeAxios from '../apis/youtube';
 
 
@@ -22,14 +23,17 @@ class App extends React.Component {
   };
 
   // the video here is the object we fetch from the youtube api
+  //Here we define onVideoSelect as a callback that we'll pass down to videoList and VideoItem. When a video gets clicked on VideoItem, that video will be passed upwards to the App.js and it'll play video. When passing a callback down to other components as a reference, have the name of the prop/attribute be the same as as the callback
    onVideoSelect = (video) => {
-       console.log('From the App', video);
+       this.setState({selectedVideo: video})
   };
 
   render() {
     return (
      <div className="ui container">
        <SearchBar onFormSubmit={this.onTermSubmit}/>
+       <VideoDetail video={this.state.selectedVideo}/>
+       {/* onVideoSelect is being passed down as a prop to VideoList component  */}
        <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
      </div>)
   }
