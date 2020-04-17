@@ -10,19 +10,20 @@ onInputChange = (event) => {
    this.setState({term: event.target.value})
 }
 
-onFormSubmit = (event) => {
+daFormSubmit = (event) => {
    event.preventDefault();
 // make sure we call callback from parent component
-this.props.onFormSubmit(this.state.term);
+this.props.daFormSubmit(this.state.term);
 
 }
 
    render() {
       return (
         <div className="search-bar ui segment" style={{backgroundColor:"#202020"}}>
-          <form onSubmit={this.onFormSubmit} className="ui form">
+          {/* anytime the form submits we call onFormSubmit */}
+          <form onSubmit={this.daFormSubmit} className="ui form">
             <div className="field">
-              < label style={{color: "#fff"}}>Video Search</label>
+              <label style={{color: "#fff"}}>Video Search</label>
               <input type="text"
               value={this.state.term}
               onChange={this.onInputChange}

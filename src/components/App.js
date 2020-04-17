@@ -16,11 +16,12 @@ class App extends React.Component {
     }
 
    componentDidMount() {
+     // this empty string passed will get random vids from youtube to display.
      this.onTermSubmit('')
    }
 
   onTermSubmit = async (term) => {
-    // calling the youtube function. This s now a pre-configured instance of axios
+    // calling the youtube function. Response is now a pre-configured instance of axios.
     const response = await youtubeAxios.get('/search', {
       params: {
         q: term,
@@ -32,13 +33,14 @@ class App extends React.Component {
     })
       this.setState({
         videos: response.data.items,
+        // this sets the app to have the first item in the response array to be the default video that displays on the screen.
         selectedVideo: response.data.items[0]
       }
         );
   };
 
   // the video here is the object we fetch from the youtube api
-  //Here we define onVideoSelect as a callback that we'll pass down to videoList and VideoItem. When a video gets clicked on VideoItem, that video will be passed upwards to the App.js and it'll play video. When passing a callback down to other components as a reference, have the name of the prop/attribute be the same as as the callback
+  //Here we define onVideoSelect as a callback that we'll pass down to videoList and VideoItem. When a video gets clicked in VideoItem, that video will be passed upwards to the App.js and it'll play video. When passing a callback down to other components as a reference, have the name of the prop/attribute be the same as as the callback
    onVideoSelect = (video) => {
        this.setState({selectedVideo: video})
   };
@@ -46,7 +48,8 @@ class App extends React.Component {
   render() {
     return (
      <div className="ui container">
-       <SearchBar onFormSubmit={this.onTermSubmit}/>
+       {/*passing onTermSubmit down to the searchbar component so it can consume the term given to it by the onFormSubmit function that gets the search term from onInputChange function in the searchbar component*/}
+      <SearchBar daFormSubmit={this.onTermSubmit}/>
       <div className="ui grid">
           <div className="ui row">
             <div className="eleven wide column">
