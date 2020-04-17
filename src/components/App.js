@@ -13,6 +13,11 @@ class App extends React.Component {
       videos: [],
       selectedVideo: null
     }
+
+   componentDidMount() {
+     this.onTermSubmit('')
+   }
+
   onTermSubmit = async (term) => {
     // calling the youtube function. This s now a pre-configured instance of axios
     const response = await youtubeAxios.get('/search', {
@@ -24,7 +29,11 @@ class App extends React.Component {
           key: KEY
       }
     })
-      this.setState({videos: response.data.items});
+      this.setState({
+        videos: response.data.items,
+        selectedVideo: response.data.items[0]
+      }
+        );
   };
 
   // the video here is the object we fetch from the youtube api
