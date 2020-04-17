@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 import youtubeAxios from '../apis/youtube';
+const KEY = 'AIzaSyBIQt5GTFYoSZWJpXEDj8tVuRdITC1Fxa8';
 
 
 class App extends React.Component {
@@ -16,7 +17,11 @@ class App extends React.Component {
     // calling the youtube function. This s now a pre-configured instance of axios
     const response = await youtubeAxios.get('/search', {
       params: {
-        q: term
+        q: term,
+          part: "snippet",
+          maxResults: 10,
+          type: 'video',
+          key: KEY
       }
     })
       this.setState({videos: response.data.items});
@@ -32,9 +37,17 @@ class App extends React.Component {
     return (
      <div className="ui container">
        <SearchBar onFormSubmit={this.onTermSubmit}/>
-       <VideoDetail video={this.state.selectedVideo}/>
-       {/* onVideoSelect is being passed down as a prop to VideoList component  */}
-       <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
+      <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={this.state.selectedVideo}/>
+            </div>
+            <div className="five wide column">
+              {/* onVideoSelect is being passed down as a prop to VideoList component  */}
+              <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
+            </div>
+          </div>
+       </div>
      </div>)
   }
 }
